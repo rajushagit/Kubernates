@@ -1,0 +1,30 @@
+Your Kubernetes control-plane has initialized successfully!
+
+To start using your cluster, you need to run the following as a regular user:
+
+  mkdir -p $HOME/.kube
+  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+Alternatively, if you are the root user, you can run:
+
+  export KUBECONFIG=/etc/kubernetes/admin.conf
+
+You should now deploy a pod network to the cluster.
+Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
+  https://kubernetes.io/docs/concepts/cluster-administration/addons/
+
+Then you can join any number of worker nodes by running the following on each as root:
+
+kubeadm join 172.31.32.27:6443 --token ctlynr.6o1kz59zis38bp62 \
+        --discovery-token-ca-cert-hash sha256:b8c13f8b00dc82dd997e8be7c6212a4197c05d680de306e65ab075c3e1017d99
+--------------------------------------------------------------------------
+       Save the above kubeadm join <token> command to run on worker node
+--------------------------------------------------------------------------
+
+-------------------------- Copy the join <token> command --------------------------
+
+    The join command must be executed in the worker node that we intend to add to the control-plane.
+      1. Better save the join command in a seperate file for future use
+      2. If the join command is lost, we can generate it using bellow command:
+            kubeadm token create --print-join-command
